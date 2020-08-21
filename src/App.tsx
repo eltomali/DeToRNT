@@ -13,8 +13,8 @@ import {StyleSheet, View} from 'react-native';
 import {PersistGate} from 'redux-persist/integration/react';
 
 import {Provider} from 'react-redux';
-import {store, persistor} from './src/app/store';
-import Main from './src/features/todos/Todos';
+import {store, persistor} from './app/store';
+import Main from './features/todos/Todos';
 //import {TodoNavigator} from './src/app/navigation';
 
 const App: FC = () => {

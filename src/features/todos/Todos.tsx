@@ -60,7 +60,6 @@ const Main: FC = () => {
                     </Text>
                   </TouchableOpacity>
                 )}
-                // style={styles.list}
               />
             </View>
           </View>
@@ -103,12 +102,3 @@ const styles = StyleSheet.create({
 });
 
 export default Main;
-
-// export const screenOptions = ({navigation}: TodosNavProps<'Main'>) => {
-//   return {
-//     headerTitle: '',
-//     // headerRight: () => (
-//     //   <Button onPress={() => navigation.navigate('AddTodo')} title="Add Todo" />
-//     // ),
-//   };
-// };

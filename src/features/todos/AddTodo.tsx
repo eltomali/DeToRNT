@@ -1,8 +1,7 @@
-import React, {useState, FC} from 'react';
+import React, {useState} from 'react';
 import {TextInput, View, Button, StyleSheet} from 'react-native';
 import {todoAdded} from './todosSlice';
 import {useAppDispatch} from '../../app/store';
-//import {TodosNavProps} from '../../app/types';
 
 const AddTodo = () => {
   const [input, setInput] = useState('');
@@ -12,7 +11,6 @@ const AddTodo = () => {
   const buttonHandler = () => {
     dispatch(todoAdded(input));
     setInput('');
-    //navigation.goBack();
   };
 
   return (
@@ -31,10 +29,6 @@ const AddTodo = () => {
 };
 
 export default AddTodo;
-
-// export const screenOptions = {
-//   headerTitle: '',
-// };
 
 const styles = StyleSheet.create({
   container: {
