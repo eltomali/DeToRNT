@@ -1,18 +1,18 @@
-import React, { useState, FC } from "react";
-import { TextInput, View, Button, StyleSheet } from "react-native";
-import { todoAdded } from "./todosSlice";
-import { useAppDispatch } from "../../app/store";
-import { TodosNavProps } from "../../app/types";
+import React, {useState, FC} from 'react';
+import {TextInput, View, Button, StyleSheet} from 'react-native';
+import {todoAdded} from './todosSlice';
+import {useAppDispatch} from '../../app/store';
+//import {TodosNavProps} from '../../app/types';
 
-const AddTodo = ({ navigation }: TodosNavProps<"AddTodo">) => {
-  const [input, setInput] = useState("");
+const AddTodo = () => {
+  const [input, setInput] = useState('');
 
   const dispatch = useAppDispatch();
 
   const buttonHandler = () => {
     dispatch(todoAdded(input));
-    setInput("");
-    navigation.goBack();
+    setInput('');
+    //navigation.goBack();
   };
 
   return (
@@ -21,6 +21,7 @@ const AddTodo = ({ navigation }: TodosNavProps<"AddTodo">) => {
         value={input}
         onChangeText={setInput}
         placeholder="Write your todo here"
+        style={styles.input}
       />
       <View style={styles.addButton}>
         <Button title="Add Todo" onPress={buttonHandler} />
@@ -31,16 +32,20 @@ const AddTodo = ({ navigation }: TodosNavProps<"AddTodo">) => {
 
 export default AddTodo;
 
-export const screenOptions = {
-  headerTitle: "",
-};
+// export const screenOptions = {
+//   headerTitle: '',
+// };
 
 const styles = StyleSheet.create({
   container: {
     marginTop: 30,
     marginHorizontal: 30,
   },
+  input: {
+    borderBottomWidth: 1.0,
+    fontSize: 20,
+  },
   addButton: {
-    marginTop: 20,
+    marginVertical: 20,
   },
 });

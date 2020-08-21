@@ -14,14 +14,16 @@ import {PersistGate} from 'redux-persist/integration/react';
 
 import {Provider} from 'react-redux';
 import {store, persistor} from './src/app/store';
-import {TodoNavigator} from './src/app/navigation';
+import Main from './src/features/todos/Todos';
+//import {TodoNavigator} from './src/app/navigation';
 
 const App: FC = () => {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <View style={styles.container}>
-          <TodoNavigator />
+          {/* <TodoNavigator /> */}
+          <Main />
         </View>
       </PersistGate>
     </Provider>
@@ -33,5 +35,6 @@ export default App;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    marginTop: 30,
   },
 });

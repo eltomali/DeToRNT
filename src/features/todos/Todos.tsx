@@ -1,23 +1,23 @@
-import React, { FC } from "react";
+import React, {FC} from 'react';
 import {
   StyleSheet,
   Text,
   View,
-  Button,
   FlatList,
   TouchableOpacity,
   ActivityIndicator,
-} from "react-native";
-import { useSelector } from "react-redux";
+} from 'react-native';
+import {useSelector} from 'react-redux';
 
-import { TodosNavProps } from "../../app/types";
-import { todoDeleted, selectAllTodos } from "./todosSlice";
-import { useAppDispatch, RootState } from "../../app/store";
+// import {TodosNavProps} from '../../app/types';
+import {todoDeleted, selectAllTodos} from './todosSlice';
+import {useAppDispatch, RootState} from '../../app/store';
+import AddTodo from './AddTodo';
 
 const Main: FC = () => {
   const todos = useSelector(selectAllTodos);
 
-  const { status, error } = useSelector((state: RootState) => state.todos);
+  const {status, error} = useSelector((state: RootState) => state.todos);
 
   const dispatch = useAppDispatch();
 
@@ -27,7 +27,7 @@ const Main: FC = () => {
 
   if (error) {
     return (
-      <View style={{ flex: 1 }}>
+      <View style={{flex: 1}}>
         <Text>Loading: {status}</Text>
         <Text>ERROR: {error}</Text>
       </View>
@@ -35,32 +35,38 @@ const Main: FC = () => {
   }
 
   return (
-    <View style={styles.container}>
-      {status === "loading" ? (
-        <View style={styles.centered}>
-          <ActivityIndicator size="large" color="red" />
-        </View>
-      ) : (
-        <View style={{ flex: 1 }}>
-          <View style={styles.title}>
-            <Text>My Todos</Text>
+    <>
+      <View style={styles.title}>
+        <Text style={styles.titleText}>My Todos</Text>
+      </View>
+      <AddTodo />
+      <View style={styles.container}>
+        {status === 'loading' ? (
+          <View style={styles.centered}>
+            <ActivityIndicator size="large" color="red" />
           </View>
-          <View style={styles.todos}>
-            <FlatList
-              data={todos}
-              keyExtractor={(item, index) => item.id.toString()}
-              renderItem={(itemData) => (
-                <TouchableOpacity
-                  onPress={() => deleteTodoHandler(itemData.item.id)}
-                >
-                  <Text>{itemData.item.text}</Text>
-                </TouchableOpacity>
-              )}
-            />
+        ) : (
+          <View style={{flex: 1}}>
+            <View style={styles.todos}>
+              <FlatList
+                data={todos}
+                keyExtractor={(item, index) => item.id.toString()}
+                renderItem={(itemData) => (
+                  <TouchableOpacity
+                    style={styles.listItem}
+                    onPress={() => deleteTodoHandler(itemData.item.id)}>
+                    <Text style={styles.listItemText}>
+                      {itemData.item.text}
+                    </Text>
+                  </TouchableOpacity>
+                )}
+                // style={styles.list}
+              />
+            </View>
           </View>
-        </View>
-      )}
-    </View>
+        )}
+      </View>
+    </>
   );
 };
 
@@ -71,26 +77,38 @@ const styles = StyleSheet.create({
   },
   title: {
     marginVertical: 10,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  titleText: {
+    fontSize: 16,
   },
   todos: {
     flex: 1,
   },
+  listItem: {
+    borderBottomWidth: 0.25,
+    borderColor: 'grey',
+    marginVertical: 10,
+  },
+  listItemText: {
+    marginVertical: 10,
+    fontSize: 16,
+  },
   centered: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
 
 export default Main;
 
-export const screenOptions = ({ navigation }: TodosNavProps<"Main">) => {
-  return {
-    headerTitle: "",
-    headerRight: () => (
-      <Button onPress={() => navigation.navigate("AddTodo")} title="Add Todo" />
-    ),
-  };
-};
+// export const screenOptions = ({navigation}: TodosNavProps<'Main'>) => {
+//   return {
+//     headerTitle: '',
+//     // headerRight: () => (
+//     //   <Button onPress={() => navigation.navigate('AddTodo')} title="Add Todo" />
+//     // ),
+//   };
+// };
